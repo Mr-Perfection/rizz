@@ -1,39 +1,41 @@
-import {
-  createServerSupabaseClient,
-  User
-} from '@supabase/auth-helpers-nextjs';
-import { GetServerSidePropsContext } from 'next';
-import Link from 'next/link';
+export { default, getServerSideProps } from './api/home';
 
-export default function Home({ user }: { user: User }) {
-  return (
-    <>
-      <div>Hello {user.email}</div>
-      <pre>{JSON.stringify(user, null, 2)}</pre>
-    </>
-  );
-}
+// import {
+//   createServerSupabaseClient,
+//   User
+// } from '@supabase/auth-helpers-nextjs';
+// import { GetServerSidePropsContext } from 'next';
+// import Link from 'next/link';
 
-export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
-  // Create authenticated Supabase Client
-  const supabase = createServerSupabaseClient(ctx);
-  // Check if we have a session
-  const {
-    data: { session }
-  } = await supabase.auth.getSession();
+// export default function Home({ user }: { user: User }) {
+//   return (
+//     <>
+//       <div>Hello {user.email}</div>
+//       <pre>{JSON.stringify(user, null, 2)}</pre>
+//     </>
+//   );
+// }
 
-  if (!session)
-    return {
-      redirect: {
-        destination: '/',
-        permanent: false
-      }
-    };
+// export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
+//   // Create authenticated Supabase Client
+//   const supabase = createServerSupabaseClient(ctx);
+//   // Check if we have a session
+//   const {
+//     data: { session }
+//   } = await supabase.auth.getSession();
 
-  return {
-    props: {
-      initialSession: session,
-      user: session.user
-    }
-  };
-};
+//   if (!session)
+//     return {
+//       redirect: {
+//         destination: '/',
+//         permanent: false
+//       }
+//     };
+
+//   return {
+//     props: {
+//       initialSession: session,
+//       user: session.user
+//     }
+//   };
+// };

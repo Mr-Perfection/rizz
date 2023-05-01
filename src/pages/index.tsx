@@ -4,7 +4,6 @@ import type { NextPage } from 'next';
 import { Auth } from '@supabase/auth-ui-react'
 import { ThemeSupa } from '@supabase/auth-ui-shared'
 import { useSession, useSessionContext, useSupabaseClient } from '@supabase/auth-helpers-react'
-import Account from '@/components/Account'
 import { Database } from '@/db_types';
 import { useEffect } from 'react';
 import Router from 'next/router';
