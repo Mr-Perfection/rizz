@@ -9,10 +9,11 @@ import { Session, createBrowserSupabaseClient } from '@supabase/auth-helpers-nex
 import { SessionContextProvider } from '@supabase/auth-helpers-react'
 import { Database } from '../db_types'
 import { Toaster } from 'react-hot-toast';
+import { appWithTranslation } from 'next-i18next';
 
 const inter = Inter({ subsets: ['latin'] });
 
-export default function App({ Component, pageProps }: AppProps<{
+function App({ Component, pageProps }: AppProps<{
   initialSession: Session
 }>) {
   const queryClient = new QueryClient();
@@ -32,3 +33,5 @@ export default function App({ Component, pageProps }: AppProps<{
     </SessionContextProvider>
   )
 }
+
+export default appWithTranslation(App);

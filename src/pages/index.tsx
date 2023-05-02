@@ -3,7 +3,7 @@ import type { NextPage } from 'next';
 // import { Inter } from 'next/font/google'
 import { Auth } from '@supabase/auth-ui-react'
 import { ThemeSupa } from '@supabase/auth-ui-shared'
-import { useSession, useSessionContext, useSupabaseClient } from '@supabase/auth-helpers-react'
+import { useSessionContext, useSupabaseClient } from '@supabase/auth-helpers-react'
 import { Database } from '@/db_types';
 import { useEffect } from 'react';
 import Router from 'next/router';

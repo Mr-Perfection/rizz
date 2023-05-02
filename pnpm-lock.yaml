@@ -1,6 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@dqbd/tiktoken': ^1.0.7
   '@supabase/auth-helpers-nextjs': ^0.6.1
   '@supabase/auth-helpers-react': ^0.3.1
   '@supabase/auth-ui-react': ^0.3.5
@@ -15,6 +16,7 @@ specifiers:
   csstype: ^3.1.2
   eslint: 8.39.0
   eslint-config-next: 13.3.1
+  eventsource-parser: ^1.0.0
   i18next: ^22.4.15
   next: 13.3.1
   next-i18next: ^13.2.2
@@ -34,6 +36,7 @@ specifiers:
   uuid: ^9.0.0
 
 dependencies:
+  '@dqbd/tiktoken': 1.0.7
   '@supabase/auth-helpers-nextjs': 0.6.1_4uvvssdpjur2vwb4mrgwovbv6y
   '@supabase/auth-helpers-react': 0.3.1_4uvvssdpjur2vwb4mrgwovbv6y
   '@supabase/auth-ui-react': 0.3.5_4uvvssdpjur2vwb4mrgwovbv6y
@@ -47,6 +50,7 @@ dependencies:
   csstype: 3.1.2
   eslint: 8.39.0
   eslint-config-next: 13.3.1_iacogk7kkaymxepzhgcbytyi7q
+  eventsource-parser: 1.0.0
   i18next: 22.4.15
   next: 13.3.1_biqbaboplfbrettd7655fr4n2y
   next-i18next: 13.2.2_7kzyffbjidsb5yrqzfyguct4gq
@@ -80,6 +84,10 @@ packages:
     engines: {node: '>=6.9.0'}
     dependencies:
       regenerator-runtime: 0.13.11
+    dev: false
+
+  /@dqbd/tiktoken/1.0.7:
+    resolution: {integrity: sha512-bhR5k5W+8GLzysjk8zTMVygQZsgvf7W1F0IlL4ZQ5ugjo5rCyiwGM5d8DYriXspytfu98tv59niang3/T+FoDw==}
     dev: false
 
   /@eslint-community/eslint-utils/4.4.0_eslint@8.39.0:
@@ -1594,6 +1602,11 @@ packages:
   /esutils/2.0.3:
     resolution: {integrity: sha512-kVscqXk4OCp68SZ0dkgEKVi6/8ij300KBWTJq32P/dYeWTSwK41WyTxalN1eRmA5Z9UU/LX9D7FWSmV9SAYx6g==}
     engines: {node: '>=0.10.0'}
+    dev: false
+
+  /eventsource-parser/1.0.0:
+    resolution: {integrity: sha512-9jgfSCa3dmEme2ES3mPByGXfgZ87VbP97tng1G2nWwWx6bV2nYxm2AWCrbQjXToSe+yYlqaZNtxffR9IeQr95g==}
+    engines: {node: '>=14.18'}
     dev: false
 
   /ext/1.7.0:
