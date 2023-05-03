@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { useQuery } from 'react-query';
 
 import { GetServerSideProps } from 'next';
@@ -40,8 +40,7 @@ import HomeContext from './home.context';
 import { HomeInitialState, initialState } from './home.state';
 
 import { v4 as uuidv4 } from 'uuid';
-import { useSessionContext, useSupabaseClient } from '@supabase/auth-helpers-react';
-import { Database } from '@/db_types';
+import { useSessionContext } from '@supabase/auth-helpers-react';
 import Router from 'next/router';
 
 interface Props {
@@ -59,7 +58,6 @@ const Home = ({
   const { getModels } = useApiService();
   const { getModelsError } = useErrorService();
   const { isLoading, session } = useSessionContext();
-  const supabase = useSupabaseClient<Database>()
   
   useEffect(() => {
     // User must be signed in.
@@ -394,10 +392,8 @@ const Home = ({
           <div className="flex h-full w-full pt-[48px] sm:pt-0">
             <Chatbar />
             <div className="flex flex-1">
-            <button onClick={() => supabase.auth.signOut()}>Sign out</button>
               <Chat stopConversationRef={stopConversationRef} />
             </div>
-
             <Promptbar />
           </div>
         </main>
