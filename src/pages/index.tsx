@@ -33,10 +33,12 @@ const LoginPage: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main
-        className={`flex min-h-screen flex-col items-center justify-between p-24`}
+        className={`flex min-h-screen items-center justify-center p-10 lg:p-24`}
       >
-        <div className="container" style={{ padding: '50px 0 100px 0' }}>
-          <Auth supabaseClient={supabase} appearance={{ theme: ThemeSupa }} theme="dark" />
+        <div className="container flex justify-center" style={{ padding: '50px 0 100px 0' }}>
+          <div className='w-full lg:w-1/2' aria-disabled={isLoading}>
+            <Auth supabaseClient={supabase} appearance={{ theme: ThemeSupa }} theme="dark"/>
+          </div>
         </div>
       </main>
     </>
