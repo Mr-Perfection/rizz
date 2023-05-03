@@ -40,6 +40,9 @@ import HomeContext from './home.context';
 import { HomeInitialState, initialState } from './home.state';
 
 import { v4 as uuidv4 } from 'uuid';
+import { useSessionContext, useSupabaseClient } from '@supabase/auth-helpers-react';
+import { Database } from '@/db_types';
+import Router from 'next/router';
 
 interface Props {
   serverSideApiKeyIsSet: boolean;
@@ -55,8 +58,17 @@ const Home = ({
   const { t } = useTranslation('chat');
   const { getModels } = useApiService();
   const { getModelsError } = useErrorService();
-  const [initialRender, setInitialRender] = useState<boolean>(true);
-
+  const { isLoading, session } = useSessionContext();
+  const supabase = useSupabaseClient<Database>()
+  
+  useEffect(() => {
+    // User must be signed in.
+    if (!isLoading && !session) {
+      console.log('isLoading ', 'session ', session)
+      Router.push('/')
+    }
+  }, [isLoading, session])
+  
   const contextValue = useCreateReducer<HomeInitialState>({
     initialState,
   });
@@ -360,8 +372,8 @@ const Home = ({
       }}
     >
       <Head>
-        <title>Chatbot UI</title>
-        <meta name="description" content="ChatGPT but better." />
+        <title>Sidekiq AI</title>
+        <meta name="description" content="Your AI Sidekiq." />
         <meta
           name="viewport"
           content="height=device-height ,width=device-width, initial-scale=1, user-scalable=no"
@@ -381,8 +393,8 @@ const Home = ({
 
           <div className="flex h-full w-full pt-[48px] sm:pt-0">
             <Chatbar />
-
             <div className="flex flex-1">
+            <button onClick={() => supabase.auth.signOut()}>Sign out</button>
               <Chat stopConversationRef={stopConversationRef} />
             </div>
 

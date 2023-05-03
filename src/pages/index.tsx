@@ -7,6 +7,7 @@ import { useSessionContext, useSupabaseClient } from '@supabase/auth-helpers-rea
 import { Database } from '@/db_types';
 import { useEffect } from 'react';
 import Router from 'next/router';
+import Head from 'next/head';
 
 // const inter = Inter({ subsets: ['latin'] })
 
@@ -15,19 +16,30 @@ const LoginPage: NextPage = () => {
   const supabase = useSupabaseClient<Database>()
 
   useEffect(() => {
-    if (session) {
+    if (!isLoading && session) {
       Router.push('home')
     }
-  }, [session])
-  return (
-    <main
-      className={`flex min-h-screen flex-col items-center justify-between p-24`}
-    >
+  }, [isLoading, session])
 
-      <div className="container" style={{ padding: '50px 0 100px 0' }}>
-        <Auth supabaseClient={supabase} appearance={{ theme: ThemeSupa }} theme="dark" />
-      </div>
-    </main>
+  return (
+    <>
+      <Head>
+        <title>Sidekiq AI</title>
+        <meta name="description" content="Your AI Sidekiq companion." />
+        <meta
+          name="viewport"
+          content="height=device-height ,width=device-width, initial-scale=1, user-scalable=no"
+        />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <main
+        className={`flex min-h-screen flex-col items-center justify-between p-24`}
+      >
+        <div className="container" style={{ padding: '50px 0 100px 0' }}>
+          <Auth supabaseClient={supabase} appearance={{ theme: ThemeSupa }} theme="dark" />
+        </div>
+      </main>
+    </>
   )
 }
 
