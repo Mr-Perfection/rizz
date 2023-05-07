@@ -21,7 +21,7 @@ export const PromptModal: FC<Props> = ({ prompt, onClose, onUpdatePrompt }) => {
 
   const handleEnter = (e: KeyboardEvent<HTMLDivElement>) => {
     if (e.key === 'Enter' && !e.shiftKey) {
-      onUpdatePrompt({ ...prompt, name, description, content: content.trim() });
+      onUpdatePrompt({ ...prompt, name, description, content: content?.trim() });
       onClose();
     }
   };
@@ -84,7 +84,7 @@ export const PromptModal: FC<Props> = ({ prompt, onClose, onUpdatePrompt }) => {
               className="mt-2 w-full rounded-lg border border-neutral-500 px-4 py-2 text-neutral-900 shadow focus:outline-none dark:border-neutral-800 dark:border-opacity-50 dark:bg-[#40414F] dark:text-neutral-100"
               style={{ resize: 'none' }}
               placeholder={t('A description for your prompt.') || ''}
-              value={description}
+              value={description || ''}
               onChange={(e) => setDescription(e.target.value)}
               rows={3}
             />
@@ -113,7 +113,7 @@ export const PromptModal: FC<Props> = ({ prompt, onClose, onUpdatePrompt }) => {
                   ...prompt,
                   name,
                   description,
-                  content: content.trim(),
+                  content: content?.trim(),
                 };
 
                 onUpdatePrompt(updatedPrompt);

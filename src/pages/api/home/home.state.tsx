@@ -17,7 +17,7 @@ export interface HomeInitialState {
   conversations: Conversation[];
   selectedConversation: Conversation | undefined;
   currentMessage: Message | undefined;
-  prompts: Prompt[];
+  prompts: Prompt[] | undefined;
   temperature: number;
   showChatbar: boolean;
   showPromptbar: boolean;

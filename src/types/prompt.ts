@@ -1,10 +1,5 @@
-import { OpenAIModel } from './openai';
+import { Database } from '@/db_types';
 
-export interface Prompt {
-  id: string;
-  name: string;
-  description: string;
-  content: string;
-  model: OpenAIModel;
-  folderId: string | null;
-}
+export type Prompt = Database['public']['Tables']['prompts']['Row'] | 
+                     Database['public']['Tables']['prompts']['Insert'] |
+                     Database['public']['Tables']['prompts']['Update']

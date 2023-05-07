@@ -43,6 +43,35 @@ export interface Database {
           username?: string
         }
       }
+      prompts: {
+        Row: {
+          content: string
+          created_at: string | null
+          description: string | null
+          id: string
+          name: string
+          owner: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          content: string
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          name?: string
+          owner?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          content?: string
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          name?: string
+          owner?: string | null
+          updated_at?: string | null
+        }
+      }
     }
     Views: {
       [_ in never]: never
