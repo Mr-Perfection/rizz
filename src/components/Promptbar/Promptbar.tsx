@@ -55,7 +55,6 @@ const Promptbar = () => {
       const { data } = await supabaseClient.from('prompts').select('*');
       homeDispatch({ field: 'prompts', value: data });
     }
-
     if (prompts === undefined) loadData();
   }, [prompts, supabaseClient, homeDispatch]);
 
@@ -92,16 +91,21 @@ const Promptbar = () => {
     savePrompts(updatedPrompts);
   };
 
-  const handleUpdatePrompt = (prompt: Prompt) => {
+  const handleUpdatePrompt = async (prompt: Prompt) => {
+    const updatedPrompt = prompt as Database['public']['Tables']['prompts']['Update']
+    const { data, error } = await supabaseClient.from('prompts').update(updatedPrompt).eq('id', updatedPrompt.id).select()
+    if (data == null) {
+      alert('Failed to update the prompt. Please reach out us!')
+      return
+    }
     const updatedPrompts = prompts!.map((p) => {
-      if (p.id === prompt.id) {
-        return prompt;
+      if (p.id === updatedPrompt.id) {
+        return updatedPrompt;
       }
 
       return p;
     });
     homeDispatch({ field: 'prompts', value: updatedPrompts });
-
     savePrompts(updatedPrompts);
   };
 
@@ -111,7 +115,6 @@ const Promptbar = () => {
 
       const updatedPrompt = {
         ...prompt,
-        folderId: e.target.dataset.folderId,
       };
 
       handleUpdatePrompt(updatedPrompt);
@@ -137,10 +140,9 @@ const Promptbar = () => {
     } else {
       promptDispatch({ field: 'filteredPrompts', value: prompts });
     }
-    // Prevent infinite refresh if we add prompts as dependency.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchTerm]);
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchTerm, prompts]);
   return (
     <PromptbarContext.Provider
       value={{

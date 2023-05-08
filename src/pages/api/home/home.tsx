@@ -75,7 +75,6 @@ const Home = ({
     state: {
       apiKey,
       lightMode,
-      folders,
       conversations,
       selectedConversation,
       prompts,
@@ -129,61 +128,61 @@ const Home = ({
       type,
     };
 
-    const updatedFolders = [...folders, newFolder];
+    // const updatedFolders = [...folders, newFolder];
 
-    dispatch({ field: 'folders', value: updatedFolders });
-    saveFolders(updatedFolders);
+    // dispatch({ field: 'folders', value: updatedFolders });
+    // saveFolders(updatedFolders);
   };
 
   const handleDeleteFolder = (folderId: string) => {
-    const updatedFolders = folders.filter((f) => f.id !== folderId);
-    dispatch({ field: 'folders', value: updatedFolders });
-    saveFolders(updatedFolders);
+    // const updatedFolders = folders.filter((f) => f.id !== folderId);
+    // dispatch({ field: 'folders', value: updatedFolders });
+    // saveFolders(updatedFolders);
 
-    const updatedConversations: Conversation[] = conversations.map((c) => {
-      if (c.folderId === folderId) {
-        return {
-          ...c,
-          folderId: null,
-        };
-      }
+    // const updatedConversations: Conversation[] = conversations.map((c) => {
+    //   if (c.folderId === folderId) {
+    //     return {
+    //       ...c,
+    //       folderId: null,
+    //     };
+    //   }
 
-      return c;
-    });
+    //   return c;
+    // });
 
-    dispatch({ field: 'conversations', value: updatedConversations });
-    saveConversations(updatedConversations);
+    // dispatch({ field: 'conversations', value: updatedConversations });
+    // saveConversations(updatedConversations);
 
-    const updatedPrompts: Prompt[] = prompts.map((p) => {
-      if (p.folderId === folderId) {
-        return {
-          ...p,
-          folderId: null,
-        };
-      }
+    // const updatedPrompts: Prompt[] = prompts.map((p) => {
+    //   if (p.folderId === folderId) {
+    //     return {
+    //       ...p,
+    //       folderId: null,
+    //     };
+    //   }
 
-      return p;
-    });
+    //   return p;
+    // });
 
-    dispatch({ field: 'prompts', value: updatedPrompts });
-    savePrompts(updatedPrompts);
+    dispatch({ field: 'prompts', value: prompts });
+    savePrompts(prompts!);
   };
 
   const handleUpdateFolder = (folderId: string, name: string) => {
-    const updatedFolders = folders.map((f) => {
-      if (f.id === folderId) {
-        return {
-          ...f,
-          name,
-        };
-      }
+    // const updatedFolders = folders.map((f) => {
+    //   if (f.id === folderId) {
+    //     return {
+    //       ...f,
+    //       name,
+    //     };
+    //   }
 
-      return f;
-    });
+    //   return f;
+    // });
 
-    dispatch({ field: 'folders', value: updatedFolders });
+    // dispatch({ field: 'folders', value: updatedFolders });
 
-    saveFolders(updatedFolders);
+    // saveFolders(updatedFolders);
   };
 
   // CONVERSATION OPERATIONS  --------------------------------------------
@@ -378,7 +377,7 @@ const Home = ({
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      {selectedConversation && (
+      {session && selectedConversation && (
         <main
           className={`flex h-screen w-screen flex-col text-sm text-white dark:text-white ${lightMode}`}
         >

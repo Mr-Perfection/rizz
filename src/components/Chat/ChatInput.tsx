@@ -27,6 +27,7 @@ import HomeContext from '@/pages/api/home/home.context';
 import { PluginSelect } from './PluginSelect';
 import { PromptList } from './PromptList';
 import { VariableModal } from './VariableModal';
+import { Database } from '@/db_types';
 
 interface Props {
   onSend: (message: Message, plugin: Plugin | null) => void;
@@ -48,7 +49,7 @@ export const ChatInput = ({
   const { t } = useTranslation('chat');
 
   const {
-    state: { selectedConversation, messageIsStreaming, prompts },
+    state: { selectedConversation, messageIsStreaming, prompts: serverPrompts },
 
     dispatch: homeDispatch,
   } = useContext(HomeContext);
@@ -64,9 +65,9 @@ export const ChatInput = ({
   const [plugin, setPlugin] = useState<Plugin | null>(null);
 
   const promptListRef = useRef<HTMLUListElement | null>(null);
-
-  const filteredPrompts = prompts.filter((prompt) =>
-    prompt.name.toLowerCase().includes(promptInputValue.toLowerCase()),
+  const prompts = (serverPrompts || []) as Database['public']['Tables']['prompts']['Row'][]
+  const filteredPrompts = (prompts).filter((prompt) =>
+    prompt.name!.toLowerCase().includes(promptInputValue.toLowerCase()),
   );
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -196,17 +197,17 @@ export const ChatInput = ({
   }, []);
 
   const handlePromptSelect = (prompt: Prompt) => {
-    const parsedVariables = parseVariables(prompt.content);
+    const parsedVariables = parseVariables(prompt.content!);
     setVariables(parsedVariables);
 
     if (parsedVariables.length > 0) {
       setIsModalVisible(true);
     } else {
       setContent((prevContent) => {
-        const updatedContent = prevContent?.replace(/\/\w*$/, prompt.content);
+        const updatedContent = prevContent?.replace(/\/\w*$/, prompt.content!);
         return updatedContent;
       });
-      updatePromptListVisibility(prompt.content);
+      updatePromptListVisibility(prompt.content!);
     }
   };
 
