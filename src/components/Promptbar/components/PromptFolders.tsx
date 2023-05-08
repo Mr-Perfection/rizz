@@ -25,7 +25,6 @@ export const PromptFolders = () => {
 
       const updatedPrompt = {
         ...prompt,
-        folderId: folder.id,
       };
 
       handleUpdatePrompt(updatedPrompt);
