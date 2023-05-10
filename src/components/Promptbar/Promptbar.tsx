@@ -84,7 +84,13 @@ const Promptbar = () => {
     }
   };
 
-  const handleDeletePrompt = (prompt: Prompt) => {
+  const handleDeletePrompt = async (prompt: Prompt) => {
+    const { error } = await supabaseClient.from('prompts').delete().eq('id', prompt.id)
+    if (error) {
+      // log error or alert the user.
+      alert('Error deleting a prompt! Please contact us if the problem persists.')
+      return
+    }
     const updatedPrompts = prompts!.filter((p) => p.id !== prompt.id);
 
     homeDispatch({ field: 'prompts', value: updatedPrompts });
